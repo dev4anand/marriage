@@ -158,7 +158,10 @@
 
 <body>
   <video autoplay="" muted="" loop="">
-    <source src="480pbgvideo.mp4" type="video/mp4">
+    <!-- <source src="480pbgvideo.mp4" type="video/mp4"> -->
+    <source src="480pbgvideo.mp4" type="video/mp4" media="(max-width: 768px)">
+    
+    <source src="pcvideo.mp4" type="video/mp4" media="(min-width: 769px)">
     Your browser does not support the video tag.
   </video>
   <audio id="myAudio" src="marriageinvitation.mp3" type="audio/mpeg"></audio>
@@ -174,6 +177,18 @@
     <button id="audioButton"><i class="fa-solid fa-volume-xmark"></i></button>
   </div>
   <script>
+    // Replace this with your actual login detection logic
+    const isMobile = window.innerWidth <= 768;
+
+    const mobileSource = document.querySelector('source[media="(max-width: 768px)"]');
+    const pcSource = document.querySelector('source[media="(min-width: 769px)"]');
+
+    if (isMobile) {
+      mobileSource.removeAttribute('media');
+      pcSource.parentNode.removeChild(pcSource); 
+    } else {
+      mobileSource.parentNode.removeChild(mobileSource); 
+    }
     const audio = document.getElementById("myAudio");
     const button = document.getElementById("audioButton");
     const playIcon = button.querySelector("i");
