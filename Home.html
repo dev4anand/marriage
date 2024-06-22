@@ -22,7 +22,6 @@
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-    /* Ensure no margin or padding on the body and html */
     html,
     body {
       margin: 0;
@@ -32,7 +31,7 @@
       font-family: Arial, sans-serif;
     }
 
-    /* Video takes full height and width of the viewport */
+    
     video {
       position: absolute;
       top: 0;
@@ -41,22 +40,18 @@
       height: 100%;
       object-fit: cover;
       z-index: -1;
-      /* Place the video behind the text */
+      
     }
-
-    /* Container for the invitation text */
     .invitation-text {
       position: absolute;
-      top: 78%;
+      top: 80%;
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
       color: white;
       text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-      /* Add some shadow to the text for better readability */
-    }
 
-    /* Styling for the individual text elements */
+    }
     .invitation-text h1 {
       font-size: 3em;
       margin: 0.2em 0;
@@ -67,22 +62,17 @@
       margin: 0.2em 0;
     }
 
-    /* Style for capsule buttons */
     .button {
       display: inline-block;
       padding: 20px 40px;
       border-radius: 50px;
       background-color: hwb(319 49% 0%);
-      /* Change background color as desired */
+
       color: #414141;
-      /* Change text color as desired */
       border: none;
       margin: 10px;
-      /* Adjust margin as needed */
       cursor: pointer;
-      /* Add hover effect for better UX */
       transition: background-color 0.2s ease-in-out;
-      /* Add a smooth transition effect */
 
     }
 
@@ -96,37 +86,50 @@
       padding: 20px 40px;
       border-radius: 50px;
       background-color: rgb(74, 247, 88);
-      /* Change background color as desired */
       color: #414141;
-      /* Change text color as desired */
       border: none;
       margin: 10px;
-      /* Adjust margin as needed */
       cursor: pointer;
-      /* Add hover effect for better UX */
       transition: background-color 0.2s ease-in-out;
-      /* Add a smooth transition effect */
 
     }
 
     .buttontwo:hover {
       background-color: hwb(112 15% 6%);
-      /* Change hover background color as desired */
     }
 
     .button:hover {
       background-color: hsl(324, 88%, 63%);
-      /* Change hover background color as desired */
     }
 
     .button-container {
       display: flex;
-      /* Use flexbox for horizontal centering */
       justify-content: center;
-      /* Align buttons horizontally in the center */
+    }
+    
+    #audioButton {
+      background-color: #cccccc;
+      border: none;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background-color 0.3s ease-in-out;
     }
 
-    /* Responsive adjustments */
+
+    #audioButton:hover {
+      background-color: hsl(0, 0%, 58%);
+    }
+
+    #myAudio {
+      display: none;
+    }
     @media (max-width: 768px) {
       .invitation-text h1 {
         font-size: 2em;
@@ -138,7 +141,6 @@
 
       .button {
         font-size: 0.8em;
-        /* Adjust font size for smaller screens */
       }
     }
 
@@ -159,9 +161,8 @@
     <source src="480pbgvideo.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
+  <audio id="myAudio" src="marriageinvitation.mp3" type="audio/mpeg"></audio>
   <div class="invitation-text">
-
-
     <div class="button-container">
       <button class="button">
         <a href="https://www.instagram.com/ar/427433976789650/?ch=N2Y3MGU1NzFkNDk0ZWEyZTEzMTI1MjQyNjdiODhhODA%3D"><b><i
@@ -170,8 +171,29 @@
       <button class="buttontwo"><b><i class="fas fa-map-marker-alt"><a href="https://maps.app.goo.gl/A3gqNkvYuut3v1oe6">
           </i> Location</b></a></button>
     </div>
+    <button id="audioButton"><i class="fa-solid fa-volume-xmark"></i></button>
   </div>
-
+  <script>
+    const audio = document.getElementById("myAudio");
+    const button = document.getElementById("audioButton");
+    const playIcon = button.querySelector("i");
+    let isPlaying = false; 
+    // fa-pause ,fa-play
+    button.addEventListener("click", () => {
+      if (isPlaying) {
+        audio.pause();
+        playIcon.classList.remove("fa-volume-high");
+        playIcon.classList.add("fa-volume-xmark");
+        button.classList.remove("mute");
+      } else {
+        audio.play();
+        playIcon.classList.remove("fa-volume-xmark");
+        playIcon.classList.add("fa-volume-high");
+        button.classList.add("mute"); 
+      }
+      isPlaying = !isPlaying;
+    });
+  </script>
 
 </body>
 
